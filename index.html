@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@400;600;700&family=Nunito:wght@300;400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
 </head>
 
@@ -26,6 +26,12 @@
         <div class="blob blob-3"></div>
         <div class="blob blob-4"></div>
     </div>
+
+    <!-- FLOATING MUSIC CONTROLLER -->
+    <button id="musicCtrlBtn" class="music-ctrl-btn" aria-label="Tocar música de fundo">
+        <span class="music-icon" id="musicIcon">🎵</span>
+    </button>
+    <audio id="bgMusic" src="music.mp3"></audio>
 
     <!-- MAIN CARD -->
     <main class="card" role="main">
@@ -93,6 +99,24 @@
         <!-- ROTATING FUN PHRASES -->
         <section class="phrase-section" aria-live="polite">
             <p class="phrase" id="birthdayPhrase"></p>
+        </section>
+
+        <!-- LIVE SUBTITLES (visible when music is playing) -->
+        <div id="liveSubtitles" class="live-subtitles">
+            <p class="sub-en" id="subEn">Clique no 🎵 no topo para começar a música!</p>
+            <p class="sub-pt" id="subPt">Clique no 🎵 no topo para iniciar a música!</p>
+        </div>
+
+        <!-- LYRICS TOGGLE BUTTON & CONTENT -->
+        <section class="lyrics-section">
+            <button id="toggleLyricsBtn" class="lyrics-btn" aria-expanded="false" aria-controls="lyricsContent">
+                Ver Letra da Música 🎵
+            </button>
+            <div id="lyricsContent" class="lyrics-content hidden">
+                <div class="lyrics-container-inner" id="lyricsContainerInner">
+                    <!-- Javascript will render synced rows here -->
+                </div>
+            </div>
         </section>
 
         <!-- FOOTER — CAKE PULSE -->

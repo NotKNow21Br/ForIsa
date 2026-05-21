@@ -539,3 +539,208 @@ body {
         margin-bottom: 26px;
     }
 }
+
+/* =========================================================
+   FLOATING MUSIC PLAYER
+   ========================================================= */
+.music-ctrl-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--clr-glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--clr-glass-bd);
+    color: var(--clr-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s, border-color 0.3s;
+}
+
+.music-ctrl-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 200, 230, 0.15);
+    border-color: rgba(255, 180, 220, 0.4);
+}
+
+.music-ctrl-btn.playing .music-icon {
+    animation: rotateMusic 4s linear infinite;
+    display: inline-block;
+}
+
+@keyframes rotateMusic {
+    to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   LIVE SUBTITLES
+   ========================================================= */
+.live-subtitles {
+    margin: 15px auto 5px;
+    padding: 10px 16px;
+    width: 90%;
+    min-height: 48px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 180, 220, 0.08);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.live-subtitles.hidden {
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+}
+
+.sub-en {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--clr-gold);
+    text-shadow: 0 0 10px rgba(253, 230, 138, 0.25);
+    text-align: center;
+    margin: 0;
+    transition: opacity 0.2s;
+}
+
+.sub-pt {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-style: italic;
+    color: rgba(255, 220, 238, 0.9);
+    text-align: center;
+    margin: 0;
+    transition: opacity 0.2s;
+}
+
+/* =========================================================
+   LYRICS SECTION
+   ========================================================= */
+.lyrics-section {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.lyrics-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--clr-rose);
+    text-decoration: underline;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s, transform 0.2s;
+    padding: 6px 12px;
+}
+
+.lyrics-btn:hover {
+    opacity: 1;
+    transform: scale(1.03);
+    color: var(--clr-pink);
+}
+
+.lyrics-content {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    opacity: 0;
+    border-radius: 8px;
+}
+
+.lyrics-content.show {
+    max-height: 250px;
+    opacity: 1;
+    overflow-y: auto;
+    margin-top: 10px;
+    border-top: 1px dashed rgba(255, 180, 220, 0.15);
+    border-bottom: 1px dashed rgba(255, 180, 220, 0.15);
+}
+
+/* Scrollbar styling for lyrics box */
+.lyrics-content::-webkit-scrollbar {
+    width: 4px;
+}
+.lyrics-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.01);
+}
+.lyrics-content::-webkit-scrollbar-thumb {
+    background: rgba(244, 114, 182, 0.25);
+    border-radius: 4px;
+}
+.lyrics-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(244, 114, 182, 0.45);
+}
+
+.lyrics-container-inner {
+    padding: 70px 10px 70px 10px; /* Padding for nice scroll snap/center */
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.lyric-row {
+    text-align: center;
+    opacity: 0.35;
+    transform: scale(0.95);
+    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                filter 0.3s;
+    cursor: pointer;
+    filter: blur(0.4px);
+}
+
+.lyric-row:hover {
+    opacity: 0.7;
+    filter: none;
+}
+
+.lyric-row.active {
+    opacity: 1;
+    transform: scale(1.05);
+    filter: none;
+}
+
+.lyric-row .lyric-en {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--clr-cream);
+    margin: 0 0 3px 0;
+}
+
+.lyric-row.active .lyric-en {
+    color: var(--clr-gold);
+    text-shadow: 0 0 10px rgba(253, 230, 138, 0.5), 0 0 20px rgba(244, 114, 182, 0.3);
+}
+
+.lyric-row .lyric-pt {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-style: italic;
+    color: rgba(255, 220, 238, 0.65);
+    margin: 0;
+}
+
+.lyric-row.active .lyric-pt {
+    color: rgba(255, 255, 255, 0.95);
+}
