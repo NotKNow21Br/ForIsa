@@ -9,7 +9,7 @@
 // ─── TARGET DATE ──────────────────────────────────────────
 function getTargetDate() {
     const now = new Date();
-    let year  = now.getFullYear();
+    let year = now.getFullYear();
     let target = new Date(year, 10, 1, 0, 0, 0); // 1° Novembro
     if (now >= target) target = new Date(year + 1, 10, 1, 0, 0, 0);
     return target;
@@ -30,7 +30,7 @@ function triggerFlip(id) {
 }
 
 function updateCountdown() {
-    const now  = new Date();   // ← relógio local do dispositivo ✓
+    const now = new Date();   // ← relógio local do dispositivo ✓
     const diff = TARGET - now;
 
     if (diff <= 0) {
@@ -39,14 +39,14 @@ function updateCountdown() {
         return;
     }
 
-    const days    = Math.floor(diff / 86400000);
-    const hours   = Math.floor((diff % 86400000) / 3600000);
-    const minutes = Math.floor((diff % 3600000)  / 60000);
-    const seconds = Math.floor((diff % 60000)    / 1000);
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
 
     [
-        { id: 'days',    val: days },
-        { id: 'hours',   val: hours },
+        { id: 'days', val: days },
+        { id: 'hours', val: hours },
         { id: 'minutes', val: minutes },
         { id: 'seconds', val: seconds },
     ].forEach(({ id, val }) => {
@@ -67,14 +67,20 @@ const phrases = [
     "🌸 Faltam só esses dias para o aniversário da minha amiga favorita!",
     "✨ Todo o universo vai brilhar mais no dia 1° de Novembro!",
     "🎂 Você merece todo o amor e felicidade do mundo, Isa!",
-    "🌷 Ser sua amiga é um presente que ganho todo dia!",
+    "🌷 Ser seu amigo é um presente que ganho todo dia!",
     "🎀 Contando os segundos para poder te abraçar no seu dia!",
     "💫 Isa, você é especial de um jeito que as palavras não conseguem explicar!",
     "🩷 O 1° de Novembro vai ser tão lindo quanto você!",
+    "🩷 Eu não vejo a hora de te encontrar!!",
+    "🩷 Vc é importante pra mim!!!",
+    "🩷 Feliz aniversário antecipado!!",
+    "🩷 Que seu dia seja repleto de alegria, paz e amor!",
+    "🩷 rawr!",
+    "🩷 Vc é muito especial pra mim",
 ];
 
 let phraseIndex = 0;
-const phraseEl  = document.getElementById('birthdayPhrase');
+const phraseEl = document.getElementById('birthdayPhrase');
 
 function showPhrase() {
     phraseEl.classList.add('fade-out');
@@ -90,11 +96,11 @@ setInterval(showPhrase, 8000);
 
 // ─── CANVAS — mini hearts + stars + petals ────────────────
 const canvas = document.getElementById('particleCanvas');
-const ctx    = canvas.getContext('2d');
+const ctx = canvas.getContext('2d');
 let W = 0, H = 0;
 
 function resize() {
-    W = canvas.width  = window.innerWidth;
+    W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
 }
 window.addEventListener('resize', resize);
@@ -104,23 +110,23 @@ resize();
 const COLORS = [
     '#f9a8d4', '#f472b6', '#e879f9',
     '#c084fc', '#fde68a', '#fdba74',
-    '#ffffff',  '#fbcfe8',
+    '#ffffff', '#fbcfe8',
 ];
 
 class Particle {
     constructor(init = false) { this.reset(init); }
 
     reset(init = false) {
-        this.x       = Math.random() * W;
-        this.y       = init ? Math.random() * H : -20;
-        this.size    = Math.random() * 12 + 4;
-        this.speedY  = Math.random() * 0.65 + 0.2;
-        this.speedX  = (Math.random() - 0.5) * 0.45;
+        this.x = Math.random() * W;
+        this.y = init ? Math.random() * H : -20;
+        this.size = Math.random() * 12 + 4;
+        this.speedY = Math.random() * 0.65 + 0.2;
+        this.speedX = (Math.random() - 0.5) * 0.45;
         this.opacity = Math.random() * 0.50 + 0.12;
-        this.color   = COLORS[Math.floor(Math.random() * COLORS.length)];
-        this.rotation  = Math.random() * Math.PI * 2;
-        this.rotSpeed  = (Math.random() - 0.5) * 0.025;
-        this.wobble    = Math.random() * Math.PI * 2;
+        this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.025;
+        this.wobble = Math.random() * Math.PI * 2;
         this.wobbleSpd = Math.random() * 0.018 + 0.006;
         // Mix of shapes: more hearts and flowers, fewer plain shapes
         const shapes = ['heart', 'heart', 'heart', 'star4', 'circle', 'petal'];
@@ -128,9 +134,9 @@ class Particle {
     }
 
     update() {
-        this.wobble   += this.wobbleSpd;
-        this.x        += Math.sin(this.wobble) * 0.65 + this.speedX;
-        this.y        += this.speedY;
+        this.wobble += this.wobbleSpd;
+        this.x += Math.sin(this.wobble) * 0.65 + this.speedX;
+        this.y += this.speedY;
         this.rotation += this.rotSpeed;
         if (this.y > H + 30) this.reset();
     }
@@ -148,7 +154,7 @@ class Particle {
     drawStar4(cx, cy, r) {
         ctx.beginPath();
         for (let i = 0; i < 8; i++) {
-            const angle  = (i * Math.PI) / 4 - Math.PI / 2;
+            const angle = (i * Math.PI) / 4 - Math.PI / 2;
             const radius = i % 2 === 0 ? r : r * 0.38;
             ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
         }
@@ -174,9 +180,9 @@ class Particle {
         ctx.fillStyle = grad;
 
         const s = this.size * 0.55;
-        if      (this.shape === 'heart')  { this.drawHeart(0, 0, s); }
-        else if (this.shape === 'star4')  { this.drawStar4(0, 0, s * 1.1); }
-        else if (this.shape === 'petal')  { this.drawPetal(0, 0, s * 1.2); }
+        if (this.shape === 'heart') { this.drawHeart(0, 0, s); }
+        else if (this.shape === 'star4') { this.drawStar4(0, 0, s * 1.1); }
+        else if (this.shape === 'petal') { this.drawPetal(0, 0, s * 1.2); }
         else {
             ctx.beginPath();
             ctx.arc(0, 0, s * 0.6, 0, Math.PI * 2);
