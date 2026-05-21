@@ -1,0 +1,434 @@
+/* =========================================================
+   ROOT & RESET
+   ========================================================= */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --clr-bg-deep:    #0d0010;
+    --clr-rose:       #e8437a;
+    --clr-pink:       #f472b6;
+    --clr-violet:     #7c3aed;
+    --clr-gold:       #ffd6a5;
+    --clr-cream:      #fff0f5;
+    --clr-glass-bg:   rgba(255, 240, 250, 0.06);
+    --clr-glass-brd:  rgba(255, 200, 230, 0.18);
+    --font-script:    'Great Vibes', cursive;
+    --font-serif:     'Cormorant Garamond', serif;
+    --font-display:   'Cinzel', serif;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-serif);
+    color: var(--clr-cream);
+    background-color: var(--clr-bg-deep);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    padding: 20px;
+}
+
+/* =========================================================
+   PARTICLE CANVAS
+   ========================================================= */
+#particleCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* =========================================================
+   AURORA BLOBS
+   ========================================================= */
+.aurora-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    mix-blend-mode: screen;
+    opacity: 0.45;
+}
+
+.blob-1 {
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, #c92a68 0%, transparent 70%);
+    top: -20vw; left: -15vw;
+    animation: driftBlob 18s ease-in-out infinite alternate;
+}
+
+.blob-2 {
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+    bottom: -10vw; right: -10vw;
+    animation: driftBlob 22s ease-in-out infinite alternate-reverse;
+}
+
+.blob-3 {
+    width: 35vw; height: 35vw;
+    background: radial-gradient(circle, #f472b6 0%, transparent 70%);
+    top: 40%; left: 55%;
+    animation: driftBlob 14s ease-in-out infinite alternate;
+}
+
+.blob-4 {
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, #450a2f 0%, transparent 70%);
+    bottom: 20%; left: 5%;
+    animation: driftBlob 26s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes driftBlob {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(4vw, 6vw) scale(1.12); }
+    100% { transform: translate(-3vw, -4vw) scale(0.92); }
+}
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+.card {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 680px;
+    padding: 56px 48px;
+    text-align: center;
+    border-radius: 28px;
+
+    /* Layered glass */
+    background:
+        linear-gradient(160deg, rgba(255,200,230,0.09) 0%, rgba(80,0,60,0.25) 100%);
+    backdrop-filter: blur(22px) saturate(1.6);
+    -webkit-backdrop-filter: blur(22px) saturate(1.6);
+
+    /* Glow border via box-shadow + border */
+    border: 1px solid var(--clr-glass-brd);
+    box-shadow:
+        0 0 0 1px rgba(255,130,180,0.08),
+        0 12px 60px rgba(0,0,0,0.55),
+        0 0 80px rgba(200, 50, 120, 0.18),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+
+    /* Animated gradient border shimmer */
+    animation: cardGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes cardGlow {
+    0%   { box-shadow: 0 0 0 1px rgba(255,130,180,0.08), 0 12px 60px rgba(0,0,0,0.55), 0 0 60px rgba(200,50,120,0.18), inset 0 1px 0 rgba(255,255,255,0.1); }
+    100% { box-shadow: 0 0 0 1px rgba(255,130,180,0.18), 0 12px 80px rgba(0,0,0,0.65), 0 0 120px rgba(200,50,120,0.30), inset 0 1px 0 rgba(255,255,255,0.15); }
+}
+
+/* =========================================================
+   CROWN / DECORATIVE STARS
+   ========================================================= */
+.crown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.star {
+    font-size: 1rem;
+    color: var(--clr-gold);
+    opacity: 0.7;
+    animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+.star-sm {
+    font-size: 0.65rem;
+    animation-delay: 1s;
+}
+
+@keyframes twinkle {
+    0%   { opacity: 0.4; transform: scale(0.9); }
+    100% { opacity: 0.9; transform: scale(1.15); }
+}
+
+/* =========================================================
+   CARD HEADER — TITLE
+   ========================================================= */
+.title {
+    font-family: var(--font-script);
+    font-size: clamp(2.8rem, 8vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    background: linear-gradient(135deg, #ffc8dd 0%, #ffffff 40%, #ffc8dd 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 18px rgba(255, 100, 160, 0.6));
+    animation: titleShimmer 5s linear infinite;
+    background-size: 200% auto;
+    margin-bottom: 10px;
+}
+
+@keyframes titleShimmer {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.date-target {
+    font-family: var(--font-display);
+    font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255, 200, 220, 0.65);
+    margin-top: 4px;
+}
+
+/* =========================================================
+   DIVIDERS
+   ========================================================= */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 28px 0;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,150,190,0.4), transparent);
+}
+
+.divider-heart, .divider-icon {
+    font-size: 0.85rem;
+    color: var(--clr-pink);
+    opacity: 0.7;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* =========================================================
+   COUNTDOWN
+   ========================================================= */
+.countdown-section { width: 100%; }
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* The glowing box with animated gradient border */
+.time-box {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    cursor: default;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.time-box::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    background: conic-gradient(
+        from var(--border-angle, 0deg),
+        #e8437a, #f472b6, #c084fc, #7c3aed, #f472b6, #e8437a
+    );
+    z-index: -1;
+    animation: spinBorder 4s linear infinite;
+}
+
+@property --border-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes spinBorder {
+    to { --border-angle: 360deg; }
+}
+
+.time-box::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 16px;
+    background: linear-gradient(160deg, rgba(30,0,25,0.95) 0%, rgba(60,0,40,0.98) 100%);
+    z-index: 0;
+}
+
+.time-num {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 20px rgba(240, 100, 160, 0.8);
+    transition: transform 0.2s ease;
+}
+
+.time-num.flip {
+    animation: flipNum 0.35s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+@keyframes flipNum {
+    0%   { transform: translateY(-30%) scale(0.85); opacity: 0; }
+    50%  { transform: translateY(10%) scale(1.05); opacity: 0.8; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.time-box:hover {
+    transform: translateY(-6px) scale(1.04);
+}
+
+.label {
+    font-family: var(--font-display);
+    font-size: clamp(0.55rem, 1.8vw, 0.7rem);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255, 200, 220, 0.55);
+}
+
+/* Separator : */
+.separator {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 600;
+    color: var(--clr-pink);
+    opacity: 0.6;
+    margin-bottom: 34px; /* align with number, not label */
+    animation: blinkSep 1.5s step-start infinite;
+    user-select: none;
+}
+
+@keyframes blinkSep {
+    0%, 49% { opacity: 0.6; }
+    50%, 100% { opacity: 0.18; }
+}
+
+/* =========================================================
+   ROTATING ROMANTIC PHRASES
+   ========================================================= */
+.phrase-section {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phrase {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    font-weight: 300;
+    color: rgba(255, 220, 235, 0.8);
+    line-height: 1.6;
+    max-width: 440px;
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.phrase.fade-out {
+    opacity: 0;
+    transform: translateY(-12px);
+}
+
+/* =========================================================
+   BIG PULSING HEART
+   ========================================================= */
+.card-footer {
+    margin-top: 10px;
+}
+
+.heart-glow-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.heart-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(220,50,100,0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%   { transform: scale(0.9); opacity: 0.5; }
+    50%  { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.5; }
+}
+
+.big-heart {
+    position: relative;
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    color: var(--clr-rose);
+    display: inline-block;
+    animation: heartbeat 1.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(232, 67, 122, 0.9));
+}
+
+@keyframes heartbeat {
+    0%   { transform: scale(1); }
+    14%  { transform: scale(1.18); }
+    28%  { transform: scale(1); }
+    42%  { transform: scale(1.12); }
+    70%  { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 580px) {
+    .card {
+        padding: 36px 20px;
+    }
+
+    .time-box {
+        width: 70px;
+        height: 70px;
+        border-radius: 12px;
+    }
+
+    .time-box::before { border-radius: 14px; }
+    .time-box::after  { border-radius: 10px; }
+
+    .separator { font-size: 1.4rem; margin-bottom: 26px; }
+
+    .countdown { gap: 6px; }
+}

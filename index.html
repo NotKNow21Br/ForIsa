@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Uma contagem regressiva romântica para o nosso dia especial — 1º de Novembro">
+    <title>Feliz Aniversário, Isa! 🎂</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- CANVAS FOR PARTICLES -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- AURORA BLOBS -->
+    <div class="aurora-wrap" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <main class="card" role="main">
+
+        <!-- DECORATIVE CROWN -->
+        <div class="crown" aria-hidden="true">
+            <span class="star">✦</span>
+            <span class="star star-sm">✦</span>
+            <span class="star">✦</span>
+        </div>
+
+        <!-- TITLE -->
+        <header class="card-header">
+            <h1 class="title">Feliz Aniversário, Isa!</h1>
+            <p class="date-target">✦ 1° de Novembro ✦</p>
+        </header>
+
+        <!-- DIVIDER -->
+        <div class="divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-heart">❤</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- COUNTDOWN -->
+        <section class="countdown-section" aria-label="Contagem regressiva">
+            <div class="countdown" id="countdown">
+                <div class="time-unit">
+                    <div class="time-box" id="box-days">
+                        <span class="time-num" id="days">00</span>
+                    </div>
+                    <span class="label">Dias</span>
+                </div>
+
+                <div class="separator" aria-hidden="true">:</div>
+
+                <div class="time-unit">
+                    <div class="time-box" id="box-hours">
+                        <span class="time-num" id="hours">00</span>
+                    </div>
+                    <span class="label">Horas</span>
+                </div>
+
+                <div class="separator" aria-hidden="true">:</div>
+
+                <div class="time-unit">
+                    <div class="time-box" id="box-minutes">
+                        <span class="time-num" id="minutes">00</span>
+                    </div>
+                    <span class="label">Minutos</span>
+                </div>
+
+                <div class="separator" aria-hidden="true">:</div>
+
+                <div class="time-unit">
+                    <div class="time-box" id="box-seconds">
+                        <span class="time-num" id="seconds">00</span>
+                    </div>
+                    <span class="label">Segundos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIVIDER -->
+        <div class="divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✦</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- ROMANTIC PHRASE (changes automatically) -->
+        <section class="phrase-section" aria-live="polite">
+            <p class="phrase" id="romanticPhrase"></p>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="card-footer">
+            <div class="heart-glow-wrap" aria-hidden="true">
+                <div class="heart-glow"></div>
+                <span class="big-heart">❤</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
